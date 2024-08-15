@@ -4,11 +4,11 @@ import pg from 'pg';
 import { Google } from 'arctic';
 
 export const pool = new pg.Pool({
-	host: 'localhost', // or the IP where your Docker is running
+	host: import.meta.env.DB_HOST,
 	port: 5432, // the port you've mapped in your docker-compose
-	user: 'myuser',
-	password: 'mypassword',
-	database: 'mydatabase'
+	user: import.meta.env.USER,
+	password: import.meta.env.PASS,
+	database: import.meta.env.DB_NAME
 });
 
 const adapter = new NodePostgresAdapter(pool, {
@@ -19,7 +19,7 @@ const adapter = new NodePostgresAdapter(pool, {
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			secure: process.env.NODE_ENV === 'production'
+			secure: import.meta.env.NODE_ENV === 'production'
 		}
 	},
 	getUserAttributes: (attributes) => {
@@ -33,9 +33,9 @@ export const lucia = new Lucia(adapter, {
 });
 
 export const googleOAuthClient = new Google(
-	'22795433123-3tqiop2jfekacg2ig7toen3hpbimjlv5.apps.googleusercontent.com',
-	'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',
-	'http://localhost:5173/auth/google/callback'
+	import.meta.env.CLIENT,
+	import.meta.env.SECRET,
+	import.meta.env.FRONT
 );
 
 declare module 'lucia' {

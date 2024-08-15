@@ -86,7 +86,7 @@
 	let currentUserId = ''; // This will be set in onMount
 	let currentLocation: Coordinates | null = null;
 
-	const API_BASE_URL = 'http://localhost:80';
+	const API_BASE_URL = import.meta.env.SERVER;
 	const sessionId = data.sessionId; // Use the session ID from the server
 
 	let updateInterval: NodeJS.Timeout;
