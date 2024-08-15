@@ -31,7 +31,7 @@
 		</svg>
 		<span>Sign in with Google</span>
 	</a>
-	<a href="https://luis.cdk.pro/haZB2zk6" on:click|preventDefault={handleRedirect}> test luis </a>
+	<a href="https://luis.cdk.pro/haZB2zk6" rel="external">test luis</a>
 </div>
 
 <!-- GoogleIcon.svelte -->
