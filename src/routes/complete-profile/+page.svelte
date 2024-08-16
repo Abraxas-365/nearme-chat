@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	let nickname = '';
 	let error = '';
@@ -9,13 +10,23 @@
 	$: email = $page.url.searchParams.get('email') || '';
 	$: googleId = $page.url.searchParams.get('googleId') || '';
 	$: profileImage = $page.url.searchParams.get('profileImage') || '';
+
+	let form;
+	const handleSubmit = () => {
+		return async ({ result }: any) => {
+			if (result.type === 'success') {
+				// If the action was successful, navigate to the home page
+				await goto('/');
+			}
+		};
+	};
 </script>
 
 <div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
 	<h1 class="text-2xl font-bold text-gray-800 mb-2">Complete Your Profile</h1>
 	<p class="text-gray-600 mb-6">Please choose a nickname to complete your registration.</p>
 
-	<form method="POST" use:enhance class="space-y-4">
+	<form method="POST" use:enhance={handleSubmit} bind:this={form} class="space-y-4">
 		<input type="hidden" name="userId" value={userId} />
 		<input type="hidden" name="email" value={email} />
 		<input type="hidden" name="googleId" value={googleId} />
