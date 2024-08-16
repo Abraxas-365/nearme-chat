@@ -35,14 +35,15 @@ export const actions: Actions = {
 
 			// Set the session cookie
 			cookies.set(sessionCookie.name, sessionCookie.value, {
-				path: '.',
+				path: '/',
 				...sessionCookie.attributes
 			});
 
 			// Update the userIdStore with the new user ID
 			userIdStore.set(userId);
 
-			throw redirect(302, '/');
+			// Redirect to the home page
+			throw redirect(302, '/test');
 		} catch (error) {
 			await client.query('ROLLBACK');
 			console.error(error);
