@@ -13,7 +13,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 	event.cookies.set('google_oauth_state', state, {
 		path: '/',
-		secure: import.meta.env.ENV,
 		httpOnly: true,
 		maxAge: 60 * 10,
 		sameSite: 'lax'
@@ -21,7 +20,6 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 	event.cookies.set('code_verifier', codeVerifier, {
 		path: '/',
-		secure: import.meta.env.ENV,
 		httpOnly: true,
 		maxAge: 60 * 10,
 		sameSite: 'lax'

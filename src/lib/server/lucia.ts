@@ -4,11 +4,11 @@ import pg from 'pg';
 import { Google } from 'arctic';
 
 export const pool = new pg.Pool({
-	host: import.meta.env.DB_HOST,
+	host: import.meta.env.VITE_DB_HOST,
 	port: 5432, // the port you've mapped in your docker-compose
-	user: import.meta.env.USER,
-	password: import.meta.env.PASS,
-	database: import.meta.env.DB_NAME
+	user: import.meta.env.VITE_USER,
+	password: import.meta.env.VITE_PASS,
+	database: import.meta.env.VITE_DB_NAME
 });
 
 const adapter = new NodePostgresAdapter(pool, {
@@ -19,7 +19,7 @@ const adapter = new NodePostgresAdapter(pool, {
 export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
-			secure: import.meta.env.ENV === 'production'
+			secure: import.meta.env.VITE_ENV === 'production'
 		}
 	},
 	getUserAttributes: (attributes) => {
@@ -31,13 +31,11 @@ export const lucia = new Lucia(adapter, {
 		};
 	}
 });
-const webURL = import.meta.env.WEB_URL;
-const googleCallback = webURL + '/auth/google/callback';
 
 export const googleOAuthClient = new Google(
-	import.meta.env.CLIENT,
-	import.meta.env.SECRET,
-	'https://nearme-chat.vercel.app/auth/google/callback'
+	import.meta.env.VITE_CLIENT,
+	import.meta.env.VITE_SECRET,
+	`${import.meta.env.VITE_FRONT}/auth/google/callback`
 );
 
 declare module 'lucia' {
