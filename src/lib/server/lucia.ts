@@ -35,7 +35,7 @@ export const lucia = new Lucia(adapter, {
 export const googleOAuthClient = new Google(
 	import.meta.env.CLIENT,
 	import.meta.env.SECRET,
-	`${import.meta.env.FRONT}/auth/google/callback`
+	import.meta.env.FRONT + '/auth/google/callback'
 );
 
 declare module 'lucia' {
