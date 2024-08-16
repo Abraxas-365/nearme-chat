@@ -31,11 +31,13 @@ export const lucia = new Lucia(adapter, {
 		};
 	}
 });
+const webURL = import.meta.env.WEB_URL;
+const googleCallback = webURL + '/auth/google/callback';
 
 export const googleOAuthClient = new Google(
 	import.meta.env.CLIENT,
 	import.meta.env.SECRET,
-	import.meta.env.FRONT + '/auth/google/callback'
+	googleCallback
 );
 
 declare module 'lucia' {
