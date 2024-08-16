@@ -1,12 +1,4 @@
 <!-- routes/login/+page.svelte -->
-<script>
-	import { goto } from '$app/navigation';
-
-	function handleRedirect() {
-		goto('https://luis.cdk.pro/haZB2zk6');
-	}
-</script>
-
 <div class="login-container">
 	<h1>Welcome</h1>
 	<p>Sign in to continue</p>
@@ -31,7 +23,6 @@
 		</svg>
 		<span>Sign in with Google</span>
 	</a>
-	<a href="https://luis.cdk.pro/haZB2zk6" rel="external">test luis</a>
 </div>
 
 <!-- GoogleIcon.svelte -->
