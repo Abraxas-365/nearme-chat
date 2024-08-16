@@ -42,7 +42,7 @@ export const actions: Actions = {
 			// Update the userIdStore with the new user ID
 			userIdStore.set(userId);
 
-			return redirect(302, '/');
+			throw redirect(302, '/');
 		} catch (error) {
 			await client.query('ROLLBACK');
 			console.error(error);
