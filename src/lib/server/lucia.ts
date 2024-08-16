@@ -37,7 +37,7 @@ const googleCallback = webURL + '/auth/google/callback';
 export const googleOAuthClient = new Google(
 	import.meta.env.CLIENT,
 	import.meta.env.SECRET,
-	googleCallback
+	'https://nearme-chat.vercel.app/auth/google/callback'
 );
 
 declare module 'lucia' {
